@@ -1,5 +1,6 @@
 package com.foodExplorer.demo.mapper;
 
+import com.foodExplorer.demo.dto.req.RestaurantRequestDTO;
 import org.mapstruct.Mapper;
 
 import com.foodExplorer.demo.dto.resp.RestaurantResponseDTO;
@@ -10,6 +11,6 @@ public interface RestaurantMapper {
 
     RestaurantResponseDTO toRestaurantResponseDTO(Restaurant restaurant);
 
-    Restaurant toRestaurant(RestaurantResponseDTO restaurantResponseDTO);
+    Restaurant toRestaurant(RestaurantRequestDTO restaurantResponseDTO);
 
 }

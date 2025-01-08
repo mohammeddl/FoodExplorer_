@@ -1,6 +1,7 @@
 package com.foodExplorer.demo.service.implt;
 
 import com.foodExplorer.demo.repository.RestaurantSearchRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -31,14 +32,12 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     @Override
-    @Transactional(readOnly = true)
     public Page<RestaurantResponseDTO> searchRestaurants(RestaurantRequestDTO params, Pageable pageable) {
         return restaurantRepository.searchRestaurants(params, pageable)
                 .map(restaurantMapper::toRestaurantResponseDTO);
     }
 
     @Override
-    @Transactional(readOnly = true)
     public RestaurantResponseDTO getRestaurantById(Long id) {
         Restaurant restaurant = restaurantRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Restaurant not found with id: " + id));
@@ -52,5 +51,4 @@ public class RestaurantServiceImpl implements RestaurantService {
         }
         restaurantRepository.deleteById(id);
     }
-}
 }
