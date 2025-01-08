@@ -1,6 +1,6 @@
 package com.foodExplorer.demo.repository.impl;
 
-import com.foodExplorer.demo.dto.req.RestaurantRequestDTO;
+import com.foodExplorer.demo.dto.req.FilterRestaurantDTO;
 import com.foodExplorer.demo.model.Restaurant;
 import com.foodExplorer.demo.repository.RestaurantSearchRepositoryCustom;
 import jakarta.persistence.EntityManager;
@@ -21,7 +21,7 @@ public class RestaurantSearchRepositoryImpl implements RestaurantSearchRepositor
     private final EntityManager entityManager;
 
     @Override
-    public Page<Restaurant> searchRestaurants(RestaurantRequestDTO params, Pageable pageable) {
+    public Page<Restaurant> searchRestaurants(FilterRestaurantDTO params, Pageable pageable) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Restaurant> criteriaQuery = criteriaBuilder.createQuery(Restaurant.class);
         Root<Restaurant> root = criteriaQuery.from(Restaurant.class);
@@ -39,7 +39,7 @@ public class RestaurantSearchRepositoryImpl implements RestaurantSearchRepositor
         return new PageImpl<>(query.getResultList(), pageable, total);
     }
 
-    private List<Predicate> createPredicates(Root<Restaurant> root, RestaurantRequestDTO params, CriteriaBuilder criteriaBuilder) {
+    private List<Predicate> createPredicates(Root<Restaurant> root, FilterRestaurantDTO params, CriteriaBuilder criteriaBuilder) {
         List<Predicate> predicates = new ArrayList<>();
 
         if (params.name() != null && !params.name().trim().isEmpty()) {
@@ -105,7 +105,7 @@ public class RestaurantSearchRepositoryImpl implements RestaurantSearchRepositor
         }
     }
 
-    private Long countTotalResults(RestaurantRequestDTO params, CriteriaBuilder criteriaBuilder) {
+    private Long countTotalResults(FilterRestaurantDTO params, CriteriaBuilder criteriaBuilder) {
         CriteriaQuery<Long> countQuery = criteriaBuilder.createQuery(Long.class);
         Root<Restaurant> countRoot = countQuery.from(Restaurant.class);
 

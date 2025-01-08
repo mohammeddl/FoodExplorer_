@@ -1,5 +1,6 @@
 package com.foodExplorer.demo.controller;
 
+import com.foodExplorer.demo.dto.req.FilterRestaurantDTO;
 import com.foodExplorer.demo.dto.req.RestaurantRequestDTO;
 import com.foodExplorer.demo.dto.resp.RestaurantResponseDTO;
 import com.foodExplorer.demo.service.RestaurantService;
@@ -51,7 +52,7 @@ public class RestaurantController {
     )
     @GetMapping("/search")
     public ResponseEntity<Page<RestaurantResponseDTO>> searchRestaurants(
-            @Valid RestaurantRequestDTO params,
+            @Valid FilterRestaurantDTO params,
             @Parameter(description = "Pageable parameters") Pageable pageable) {
         return ResponseEntity.ok(restaurantService.searchRestaurants(params, pageable));
     }

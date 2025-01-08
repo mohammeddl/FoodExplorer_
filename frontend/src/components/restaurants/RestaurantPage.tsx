@@ -14,7 +14,7 @@ export const RestaurantPage = () => {
   const handleAddRestaurant = async (data: RestaurantFormData) => {
     try {
       setLoading(true);
-      const response = await fetch('http://localhost:8080/api/restaurants', {
+      const response = await fetch('http://localhost:3030/api/restaurants', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -44,7 +44,7 @@ export const RestaurantPage = () => {
       if (filters.cuisineType) params.append('cuisineType', filters.cuisineType);
       if (filters.rating) params.append('rating', filters.rating.toString());
       
-      const response = await fetch(`http://localhost:8080/api/restaurants/search?${params.toString()}`);
+      const response = await fetch(`http://localhost:3030/api/restaurants/search?${params.toString()}`);
       if (response.ok) {
         const data = await response.json();
         setRestaurants(data.content);

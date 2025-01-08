@@ -1,5 +1,6 @@
 package com.foodExplorer.demo.service.implt;
 
+import com.foodExplorer.demo.dto.req.FilterRestaurantDTO;
 import com.foodExplorer.demo.repository.RestaurantSearchRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.data.domain.Page;
@@ -32,7 +33,7 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     @Override
-    public Page<RestaurantResponseDTO> searchRestaurants(RestaurantRequestDTO params, Pageable pageable) {
+    public Page<RestaurantResponseDTO> searchRestaurants(FilterRestaurantDTO params, Pageable pageable) {
         return restaurantRepository.searchRestaurants(params, pageable)
                 .map(restaurantMapper::toRestaurantResponseDTO);
     }
